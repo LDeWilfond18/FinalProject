@@ -11,7 +11,7 @@ public class Slots {
 		int number2 = 0;
 		int number3 = 0;
 		System.out.println("How much would you like to bet?");
-//		Chances should be: (1/2) + (1/4)+ (1/8) + (1/20) + (1/24) + (1/32) + (1/480)
+//		Chances should be: (1/2) + (1/4)+ (1/8) + (1/20) + (1/24) + (1/32) + (1/480) if it reaches 7 and does not equal 7, the output is 1,2,3
 		for(int count = 0; count < 3; count++) {
 		for(int i = 0; i < 1; i++) {
 			int ran = (int) (Math.random() * 2 + 1);
@@ -120,7 +120,7 @@ public class Slots {
 																											number2 = 2;
 																											}
 																											else if(count == 2) {
-																											number3 = 3;
+																											number3 =  3;
 																											}
 																										}
 																									}
@@ -146,10 +146,11 @@ public class Slots {
 		int winnings = 0;
 		int runCount = 0;
 		int endMoney = 100;
+		do {
 		System.out.println("Please enter a bet >> ");
 		Scanner input = new Scanner(System.in);
 		bet = input.nextInt();
-		
+		//The game looks for matching numbers and changes the winnings accordingly.
 			if(number == number2 && number2 == number3 && number == number3) {
 			if(number == 1 && number2 == 1 && number == 1) {
 				winnings = bet * 10;
@@ -175,10 +176,13 @@ public class Slots {
 			else if(number != number2) {
 			}
 		}
+		
 			Wallet.moneyAmount(bet, winnings);
 		if (bet > Wallet.moneyAmount(bet, winnings)) {
 		System.out.println("Insufficient funds.");
 		}
+		//The slot machine is shown, as well as the legend for sets of numbers.
+		else if(bet <= Wallet.moneyAmount(bet, winnings)) {
 		while(bet <= Wallet.moneyAmount(bet, winnings) && runCount == 0) {
 		for(runCount = 0; runCount < 1; runCount++) {
 		System.out.println("\n              000000000000000000000     0000000000000000000000000000000000000");
@@ -199,17 +203,20 @@ public class Slots {
 		System.out.println("    00000000000000000000       0     ");
 		System.out.println("    00000000000000000000     0       ");
 		System.out.println("    000000000000000000000000         ");
-		
+		//The money won or lost is displayed, and the player is given the amount of money stored in the wallet.
 		if(number == number2 && number == number3) {
 		System.out.println("\nYou won " + winnings + " dollars.");
 		}
-		else if(number != number2) {
-			System.out.println("\nYou lost " + bet + " dollars.");
+		else if(number != number2 || number2 != number3 || number != number3) {
+		System.out.println("\nYou lost " + bet + " dollars.");	
 		}
-		
 		Wallet.endMoney(bet, winnings, endMoney);
+		bet = 0;
+		
 		}
-		}		
+		}	
+		}
+		}while (bet > Wallet.moneyAmount(bet, winnings));
 	}
 }
 
