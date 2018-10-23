@@ -5,11 +5,6 @@ import main.Wallet;
 
 public class Roulette {
 
-
-
-
-public class Roulette {
-
 	
 	public static void roulette() {
 		
@@ -124,7 +119,6 @@ public class Roulette {
 		}while (bet <= Wallet.moneyAmount(bet, winnings));
 	}
 }
-
 
 		
 
